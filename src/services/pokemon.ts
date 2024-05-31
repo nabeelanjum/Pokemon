@@ -5,6 +5,9 @@ const API_VERSION = 'v2';
 const BASE_URL = `https://pokeapi.co/api/${API_VERSION}/`;
 
 interface ListResponse {
+  count: number,
+  next: null | string;
+  previous: null | string;
   results: Pokemon[];
 }
 
