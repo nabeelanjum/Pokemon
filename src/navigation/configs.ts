@@ -6,6 +6,5 @@ export const stackRoutes = {
 }
 
 export const stackConfig: StackNavigationOptions = {
-  headerTitleAlign: "left",
   headerBackTitleVisible: false,
 }
