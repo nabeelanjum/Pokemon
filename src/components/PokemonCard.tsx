@@ -5,14 +5,22 @@ import AppText from './shared/AppText';
 
 interface IProps {
   pokemon: Pokemon;
-  onPress: () => void;
+  onPress: (id: string) => void;
 }
 
 const PokemonCard: React.FC<IProps> = (props) => {
   const { onPress, pokemon } = props;
 
+  const handleOnPress = () => {
+    const id = pokemon.url.split('/')?.[6];
+    onPress(id);
+  }
+
   return (
-    <Pressable style={styles.container}>
+    <Pressable
+      style={styles.container}
+      onPress={handleOnPress}
+    >
       <Image
         source={{ uri: pokemon.url }}
         style={styles.image}
