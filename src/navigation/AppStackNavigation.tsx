@@ -16,6 +16,7 @@ const AppStackNavigation = () => {
       <Stack.Screen
         name={stackRoutes.PokemonDetails}
         component={PokemonDetails}
+        options={{ headerTitle: 'Details' }}
       />
     </Stack.Navigator>
   );

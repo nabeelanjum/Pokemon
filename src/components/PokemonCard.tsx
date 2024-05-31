@@ -25,7 +25,7 @@ const PokemonCard: React.FC<IProps> = (props) => {
         source={{ uri: pokemon.url }}
         style={styles.image}
       />
-      <AppText>{pokemon.name}</AppText>
+      <AppText size={16}>{pokemon.name}</AppText>
     </Pressable>
   );
 }

@@ -1,25 +1,40 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useGetPokemonListQuery } from "../services/pokemon";
-import { useEffect } from "react";
 import { setPokemonList } from "../store/slices/pokemon.slice";
 import { RootState } from "../store";
 
 const usePokemonList = () => {
   const dispatch = useDispatch();
+  const { pokemonList } = useSelector((state: RootState) => state.pokemon);
 
-  const { data, error, isLoading, refetch } = useGetPokemonListQuery();
+  const limit = useRef(20);
+
+  const [page, setPage] = useState(0);
+
+  const offset = useMemo(() => page * limit.current, [page]);
+
+  const { data, error, isLoading } = useGetPokemonListQuery(offset);
 
   useEffect(() => {
-    dispatch(setPokemonList(data?.results || []));
+    const newList = offset > 0 ? [...pokemonList, ...data?.results || []] : data?.results;
+    dispatch(setPokemonList(newList || []));
   }, [data?.results]);
 
-  const { pokemonList } = useSelector((state: RootState) => state.pokemon);
+  const setNextPage = useCallback(() => {
+    setPage((cPage) => cPage + 1);
+  }, [setPage]);
+
+  const resetPage = useCallback(() => {
+    setPage(0);
+  }, [setPage]);
 
   return {
     pokemonList,
     error,
     isLoading,
-    refetch,
+    setNextPage,
+    resetPage,
   }
 }
 
