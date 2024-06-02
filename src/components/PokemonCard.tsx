@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Pressable, StyleSheet } from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
 import { Pokemon } from '../common/types';
 import AppText from './shared/AppText';
 
@@ -23,10 +23,6 @@ const PokemonCard: React.FC<IProps> = (props) => {
       style={styles.container}
       onPress={handleOnPress}
     >
-      <Image
-        source={{ uri: pokemon.url }}
-        style={styles.image}
-      />
       <AppText size={16}>{pokemon.name}</AppText>
     </Pressable>
   );
@@ -38,6 +34,8 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+    paddingHorizontal: 15,
+    paddingVertical: 25,
   },
   image: {
     width: 70,
