@@ -22,20 +22,23 @@ const PokemonList = () => {
     <View style={styles.container}>
       <FlatList
         data={pokemonList}
+        // Giving index in keyExtractor doesn't checks for duplication
+        // Normally I give `ID` but we don't have any id here that's why I relied on name
         keyExtractor={(item) => item.name}
         renderItem={({ item }) => (
-          <PokemonCard pokemon={item} onPress={(id: string) => navigation.navigate(stackRoutes.PokemonDetails, { id })} />
+          <PokemonCard
+            pokemon={item}
+            onPress={(id: string) => navigation.navigate(stackRoutes.PokemonDetails, { id })}
+          />
         )}
         ItemSeparatorComponent={() => <Separator />}
-        onEndReached={() => {
-          setNextPage();
-        }}
+        onEndReached={() => setNextPage()}
         onEndReachedThreshold={0.5}
         onRefresh={resetPage}
         refreshing={isLoading}
       />
     </View>
-  )
+  );
 }
 
 export default PokemonList;
