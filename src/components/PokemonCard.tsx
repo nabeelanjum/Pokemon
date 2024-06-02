@@ -2,6 +2,7 @@ import React from 'react';
 import { Pressable, StyleSheet } from 'react-native';
 import { Pokemon } from '../common/types';
 import AppText from './shared/AppText';
+import colors from '../common/colors';
 
 interface IProps {
   pokemon: Pokemon;
@@ -20,7 +21,10 @@ const PokemonCard: React.FC<IProps> = (props) => {
 
   return (
     <Pressable
-      style={styles.container}
+      style={({ pressed }) => [
+        styles.container,
+        pressed && { backgroundColor: colors.lightGrey }
+      ]}
       onPress={handleOnPress}
     >
       <AppText size={16}>{pokemon.name}</AppText>
