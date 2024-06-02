@@ -23,7 +23,7 @@ const PokemonList = () => {
 
     return (
       <AppText style={styles.errorText}>
-        {error
+        {!!error
           ? 'Oops, there was an error loading the list. Pull down to try again.'
           : 'No results, pull down to refresh.'
         }

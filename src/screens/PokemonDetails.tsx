@@ -3,10 +3,8 @@ import { ActivityIndicator, Image, StyleSheet, View } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import usePokemonDetails from '../hooks/usePokemonDetails';
 import InfoTile from '../components/InfoTile';
-
-interface Params {
-  id: string;
-}
+import { AppText } from '../components';
+import colors from '../common/colors';
 
 const PokemonDetails = () => {
 
@@ -22,6 +20,14 @@ const PokemonDetails = () => {
 
   if (isLoading) {
     return <ActivityIndicator size='large' style={{ marginTop: 40 }} />
+  }
+
+  if (!!error) {
+    return (
+      <AppText style={styles.errorText}>
+        Oops, there was an error fetching details
+      </AppText>
+    );
   }
 
   return (
@@ -46,6 +52,7 @@ export default PokemonDetails;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: colors.white,
   },
   body: {
     paddingHorizontal: 15,
@@ -54,5 +61,10 @@ const styles = StyleSheet.create({
   image: {
     height: 200,
     resizeMode: 'contain',
+  },
+  errorText: {
+    marginTop: 40,
+    marginHorizontal: 20,
+    textAlign: 'center',
   }
 });
