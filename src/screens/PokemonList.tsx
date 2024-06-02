@@ -32,7 +32,7 @@ const PokemonList = () => {
   }, [error, isLoading]);
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="pokemon-list-container">
       <FlatList
         data={pokemonList}
         // Giving index in keyExtractor doesn't checks for duplication
@@ -50,6 +50,7 @@ const PokemonList = () => {
         onEndReachedThreshold={0.5}
         onRefresh={resetPage}
         refreshing={isLoading}
+        testID='pokemon-list'
       />
     </View>
   );

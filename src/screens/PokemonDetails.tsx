@@ -19,7 +19,13 @@ const PokemonDetails = () => {
   } = usePokemonDetails(id);
 
   if (isLoading) {
-    return <ActivityIndicator size='large' style={{ marginTop: 40 }} />
+    return (
+      <ActivityIndicator
+        size='large'
+        style={{ marginTop: 40 }}
+        testID='loading-indicator'
+      />
+    );
   }
 
   if (!!error) {
@@ -35,6 +41,7 @@ const PokemonDetails = () => {
       <Image
         source={{ uri: pokemonDetails?.sprites.front_default }}
         style={styles.image}
+        testID='pokemon-image'
       />
 
       <View style={styles.body}>
