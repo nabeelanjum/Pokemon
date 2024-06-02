@@ -17,7 +17,12 @@ const usePokemonList = () => {
   const { data, error, isLoading } = useGetPokemonListQuery(offset);
 
   useEffect(() => {
-    const newList = offset > 0 ? [...pokemonList, ...data?.results || []] : data?.results;
+    // If loading next page then merge existing and new results
+    // If loading first page or `pull to refresh` then just use new results
+    const newList = offset > 0
+      ? [...pokemonList, ...data?.results || []]
+      : data?.results;
+
     dispatch(setPokemonList(newList || []));
   }, [data?.results]);
 
