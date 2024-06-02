@@ -27,8 +27,9 @@ const usePokemonList = () => {
   }, [data?.results]);
 
   const setNextPage = useCallback(() => {
-    setPage((cPage) => cPage + 1);
-  }, [setPage]);
+    if (!!pokemonList.length)
+      setPage((cPage) => cPage + 1);
+  }, [setPage, pokemonList]);
 
   const resetPage = useCallback(() => {
     setPage(0);

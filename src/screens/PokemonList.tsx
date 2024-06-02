@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
-import { PokemonCard, Separator } from '../components';
+import { AppText, PokemonCard, Separator } from '../components';
 import usePokemonList from '../hooks/usePokemonList';
 import { useNavigation } from '@react-navigation/native';
 import { stackRoutes } from '../navigation/configs';
@@ -18,6 +18,19 @@ const PokemonList = () => {
     setNextPage,
   } = usePokemonList();
 
+  const renderListEmptyComponent = useMemo(() => {
+    if (isLoading) return null;
+
+    return (
+      <AppText style={styles.errorText}>
+        {error
+          ? 'Oops, there was an error loading the list. Pull down to try again.'
+          : 'No results, pull down to refresh.'
+        }
+      </AppText>
+    );
+  }, [error, isLoading]);
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -32,6 +45,7 @@ const PokemonList = () => {
           />
         )}
         ItemSeparatorComponent={() => <Separator />}
+        ListEmptyComponent={renderListEmptyComponent}
         onEndReached={() => setNextPage()}
         onEndReachedThreshold={0.5}
         onRefresh={resetPage}
@@ -47,5 +61,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
+  },
+  errorText: {
+    marginTop: 40,
+    marginHorizontal: 20,
+    textAlign: 'center',
   }
 });

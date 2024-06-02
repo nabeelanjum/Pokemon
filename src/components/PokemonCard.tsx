@@ -12,6 +12,8 @@ const PokemonCard: React.FC<IProps> = (props) => {
   const { onPress, pokemon } = props;
 
   const handleOnPress = () => {
+    // A hack to extract ID out of the url
+    // I know this is a very hacky way but we are not getting IDs explicitly
     const id = pokemon.url.split('/')?.[6];
     onPress(id);
   }
