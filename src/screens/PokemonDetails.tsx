@@ -2,8 +2,7 @@ import React from 'react';
 import { ActivityIndicator, Image, StyleSheet, View } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import usePokemonDetails from '../hooks/usePokemonDetails';
-import InfoTile from '../components/InfoTile';
-import { AppText } from '../components';
+import { AppText, InfoTile } from '../components';
 import colors from '../common/colors';
 
 const PokemonDetails = () => {

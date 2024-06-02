@@ -1,10 +1,9 @@
 import React from "react";
 import { View } from "react-native";
 import { Provider } from 'react-redux';
-
+import { PersistGate } from "redux-persist/integration/react";
 import RootNavigation from "./navigation";
 import store, { persistor } from "./store";
-import { PersistGate } from "redux-persist/integration/react";
 
 const App: React.FC = () => {
   return (
